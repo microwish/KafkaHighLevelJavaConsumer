@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+ZK_SERVERS="192.168.146.66:2181,192.168.146.56:2181,192.168.146.64:2181,192.168.146.65:2181,192.168.146.67:2181,192.168.146.68:2181,192.168.146.69:2181/kafka"
+
+CONSUMER_GROUP=test1
+
+TOPIC=imp
+
+PARTITION_NUM=10
+
+classpath=
+
+for f in $(ls kafka_libs)
+do
+    classpath="kafka_libs/$f:$classpath"
+done
+
+#javac -g -cp $CLASSPATH:$classpath com/ipinyou/kafka/consumer/KafkaHighLevelConsumer.java com/ipinyou/kafka/consumer/RunningConsumer.java
+
+#jar cf KafkaHLJavaConsumer.jar com
+
+#javac -g -d . -cp $CLASSPATH:$classpath:KafkaHLJavaConsumer.jar TestConsumer_new.java
+
+java -cp $CLASSPATH:$classpath:KafkaHLJavaConsumer.jar test.ConsumerExample $ZK_SERVERS $CONSUMER_GROUP $TOPIC $PARTITION_NUM
